@@ -1,0 +1,26 @@
+@use "../../assets/styles/variables";
+
+.not_found {
+  justify-content: center;
+
+  &_img {
+    width: 70%;
+    margin-bottom: 5%;
+    aspect-ratio: 1/1;
+    background-image: url(../../../public/404.webp);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  &_text {
+    margin-bottom: 5%;
+    font-size: 0.8rem;
+    text-align: center;
+  }
+
+  &_link {
+    padding: 2% 4%;
+    font-size: 0.8rem;
+  }
+}

@@ -1,0 +1,133 @@
+paths:
+  /api/auth:
+    get:
+      summary: Information sur les routes d'authentification
+      description: Retourne la liste des endpoints d'authentification disponibles
+      tags: [Authentication]
+      responses:
+        200:
+          description: Liste des endpoints d'authentification
+
+  /api/auth/register:
+    post:
+      summary: Inscription d'un nouvel utilisateur
+      description: Permet à un utilisateur de créer un compte (par défaut avec le rôle famille)
+      tags: [Authentication]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+                - first_name
+                - last_name
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: jean.dupont@email.com
+                password:
+                  type: string
+                  minLength: 8
+                  description: Doit contenir majuscule, minuscule et chiffre
+                  example: MotDePasse123
+                first_name:
+                  type: string
+                  example: Jean
+                last_name:
+                  type: string
+                  example: Dupont
+      responses:
+        201:
+          description: Inscription réussie
+        400:
+          description: Erreur de validation
+        409:
+          description: Email déjà utilisé
+
+  /api/auth/login:
+    post:
+      summary: Connexion utilisateur
+      description: Authentification avec email et mot de passe
+      tags: [Authentication]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: jean.dupont@email.com
+                password:
+                  type: string
+                  example: MotDePasse123
+      responses:
+        200:
+          description: Connexion réussie
+        401:
+          description: Email ou mot de passe incorrect
+        400:
+          description: Erreur de validation
+
+  /api/auth/logout:
+    post:
+      summary: Déconnexion utilisateur
+      description: Déconnecte l'utilisateur
+      tags: [Authentication]
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Déconnexion réussie
+        401:
+          description: Token invalide ou expiré
+
+  /api/auth/profile:
+    get:
+      summary: Profil utilisateur
+      description: Récupère les informations complètes du profil de l'utilisateur connecté
+      tags: [Authentication]
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Profil récupéré avec succès
+        401:
+          description: Token invalide ou expiré
+
+  /api/auth/switch-role:
+    post:
+      summary: Changer de rôle
+      description: Permet à un utilisateur de basculer entre les rôles famille et association
+      tags: [Authentication]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - role
+              properties:
+                role:
+                  type: string
+                  enum: [foster, association]
+                  example: "association"
+      responses:
+        200:
+          description: Rôle changé avec succès
+        400:
+          description: Erreur de validation ou changement impossible
+        401:
+          description: Token invalide

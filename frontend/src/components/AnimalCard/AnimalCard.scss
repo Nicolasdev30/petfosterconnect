@@ -1,0 +1,164 @@
+/**
+ * STYLES POUR LA CARTE ANIMAL
+ * 
+ * Design moderne avec effets visuels :
+ * - Card design avec ombres et transitions
+ * - Effet hover sur l'image (zoom)
+ * - Badge de statut coloré selon disponibilité
+ * - Layout responsive adaptatif
+ * 
+ * Structure visuelle :
+ * - Image en haut avec overlay de statut
+ * - Contenu avec informations organisées en grille
+ * - Bouton d'action proéminent en bas
+ * 
+ * Accessibilité :
+ * - Contrastes respectant WCAG 2.1
+ * - Transitions fluides pour l'UX
+ * - Responsive design mobile-first
+ */
+
+.animal_card {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+
+  // Image principale de l'animal avec effet hover
+  &_img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: var(--transition-normal);
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  // Contenu principal de la carte
+  &_content {
+    padding: var(--spacing-2xl);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    background: rgba(255, 255, 255, 0.9);
+    margin: var(--spacing-lg);
+    border-radius: var(--radius-xl);
+  }
+
+  // En-tête avec nom et badge de statut
+  &_header {
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+
+    h3 {
+      font-size: var(--font-size-2xl);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+      margin: 0 0 var(--spacing-sm) 0;
+      font-family: var(--font-primary);
+    }
+
+    // Badge de statut avec couleurs conditionnelles
+    .status {
+      display: inline-block;
+      padding: var(--spacing-xs) var(--spacing-md);
+      border-radius: var(--radius-xl);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-semibold);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-family: var(--font-secondary);
+
+      &--disponible {
+        background-color: var(--color-success-light);
+        color: var(--color-success);
+        border: 1px solid rgba(46, 204, 113, 0.2);
+      }
+
+      &--accueilli {
+        background-color: var(--color-error-light);
+        color: var(--color-error);
+        border: 1px solid rgba(231, 76, 60, 0.2);
+      }
+    }
+  }
+
+  // Grille d'informations (espèce, race, sexe, âge)
+  &_section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+
+    .info-item {
+      display: flex;
+      flex-direction: column;
+
+      .label {
+        font-size: var(--font-size-xs);
+        font-weight: var(--font-weight-medium);
+        color: var(--color-text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: var(--spacing-xs);
+        font-family: var(--font-secondary);
+      }
+
+      .value {
+        font-size: var(--font-size-sm);
+        font-weight: var(--font-weight-medium);
+        color: var(--color-text-primary);
+        font-family: var(--font-secondary);
+      }
+    }
+  }
+
+  // Bouton d'action principal (navigation vers détails)
+  &_link {
+    margin-top: auto;
+    padding: var(--spacing-md) var(--spacing-2xl);
+    background: var(--color-accent);
+    color: var(--color-white);
+    text-decoration: none;
+    text-align: center;
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-sm);
+    font-family: var(--font-secondary);
+    border-radius: var(--radius-md);
+    transition: var(--transition-fast);
+
+    &:hover {
+      background: #e07b73;
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-button);
+      text-decoration: none;
+      color: var(--color-white);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  // Badge optionnel pour marquer les nouveaux animaux
+  // Badge de nouveau/récent
+  &_badge {
+    position: absolute;
+    top: var(--spacing-lg);
+    right: var(--spacing-lg);
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+    color: var(--color-white);
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: var(--radius-xl);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 10px rgba(255, 107, 107, 0.3);
+  }
+}

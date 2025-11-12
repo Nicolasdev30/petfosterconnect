@@ -1,0 +1,156 @@
+paths:
+  /api/associations:
+    get:
+      summary: Liste des associations
+      description: Récupère toutes les associations avec recherche et pagination
+      tags: [Associations]
+      parameters:
+        - in: query
+          name: search
+          schema:
+            type: string
+          description: Recherche par nom d'association
+          example: "Refuge des 4 Pattes"
+        - in: query
+          name: page
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+          description: Numéro de page
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 10
+          description: Nombre d'associations par page
+      responses:
+        200:
+          description: Liste des associations récupérée avec succès
+
+  /api/associations/create:
+    post:
+      summary: Créer une nouvelle association
+      description: Permet à un utilisateur de créer une association et de s'y rattacher automatiquement
+      tags: [Associations]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - email
+                - phone
+                - address
+              properties:
+                name:
+                  type: string
+                  example: "SPA de Paris"
+                email:
+                  type: string
+                  format: email
+                  example: "contact@spa-paris.fr"
+                phone:
+                  type: string
+                  example: "0123456789"
+                address:
+                  type: string
+                  example: "123 Rue de la Paix, 75001 Paris"
+      responses:
+        201:
+          description: Association créée avec succès
+        400:
+          description: Erreur de validation ou utilisateur déjà rattaché
+        401:
+          description: Token invalide
+
+  /api/associations/{id}:
+    get:
+      summary: Détails d'une association
+      description: Récupère les informations détaillées d'une association avec ses animaux
+      tags: [Associations]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID unique de l'association
+          example: 1
+      responses:
+        200:
+          description: Détails de l'association récupérés avec succès
+        404:
+          description: Association non trouvée
+
+    patch:
+      summary: Modifier une association
+      description: Permet à une association de modifier ses propres informations
+      tags: [Associations]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID de l'association à modifier
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                  format: email
+                phone:
+                  type: string
+                address:
+                  type: string
+      responses:
+        200:
+          description: Association modifiée avec succès
+        400:
+          description: Erreur de validation
+        401:
+          description: Non authentifié
+        403:
+          description: Accès refusé
+        404:
+          description: Association non trouvée
+
+    delete:
+      summary: Supprimer une association
+      description: Permet à un administrateur de supprimer une association (action sensible)
+      tags: [Associations]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID de l'association à supprimer
+          example: 1
+      responses:
+        200:
+          description: Association supprimée avec succès
+        401:
+          description: Non authentifié
+        403:
+          description: Accès refusé - Rôle administrateur requis
+        404:
+          description: Association non trouvée

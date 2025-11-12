@@ -1,0 +1,39 @@
+{
+  "name": "backend-petfosterconnect",
+  "version": "1.0.0",
+  "description": "Backend for Pet Foster Connect",
+  "license": "ISC",
+  "author": "Alexandre, Thomas, Alex, Nicolas",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "vitest",
+    "db:create": "psql -U petfosterconnect -d petfosterconnect -f src/database/mpd.sql",
+    "db:seed": "psql -U petfosterconnect -d petfosterconnect -f src/database/data.exemples.sql",
+    "db:reset": "npm run db:create && npm run db:seed"
+  },
+  "dependencies": {
+    "argon2": "^0.43.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "express-validator": "^7.2.1",
+    "helmet": "^8.1.0",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.16.3",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.7",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "vitest": "^3.2.4",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10",
+    "supertest": "^7.1.4"
+  }
+}

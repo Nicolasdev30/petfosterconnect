@@ -1,0 +1,182 @@
+@use "../../assets/styles/variables";
+
+.animals {
+  max-width: var(--container-max-width);
+  margin: var(--spacing-3xl) auto;
+  padding: 0 var(--spacing-lg);
+
+  // Formulaire de filtres
+  &_form {
+    background: var(--color-background);
+    padding: var(--spacing-2xl);
+    margin-bottom: var(--spacing-3xl);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(145, 181, 159, 0.2);
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-lg);
+    align-items: end;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--spacing-lg);
+    }
+
+    label {
+      flex: 1;
+      min-width: 180px;
+      display: flex;
+      flex-direction: column;
+      font-family: var(--font-secondary);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-text-primary);
+      font-size: var(--font-size-sm);
+
+      @media (max-width: 768px) {
+        min-width: 100%;
+      }
+
+      span {
+        margin-bottom: var(--spacing-sm);
+        font-size: var(--font-size-sm);
+        color: var(--color-text-secondary);
+        font-weight: var(--font-weight-medium);
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: var(--spacing-md) var(--spacing-lg);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-sm);
+        font-size: var(--font-size-sm);
+        font-family: var(--font-secondary);
+        background-color: var(--color-white);
+        color: var(--color-text-primary);
+        transition: var(--transition-fast);
+
+        &:focus {
+          outline: none;
+          border-color: var(--color-primary);
+          box-shadow: 0 0 0 2px rgba(145, 181, 159, 0.2);
+        }
+
+        &:hover {
+          border-color: var(--color-primary);
+        }
+
+        &::placeholder {
+          color: var(--color-text-secondary);
+        }
+      }
+
+      select {
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236B7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+        background-position: right var(--spacing-md) center;
+        background-repeat: no-repeat;
+        background-size: 1.25rem;
+        padding-right: 2.5rem;
+      }
+    }
+
+    &_search_button {
+      padding: var(--spacing-md) var(--spacing-2xl);
+      background: var(--color-accent);
+      color: var(--color-white);
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-secondary);
+      font-weight: var(--font-weight-semibold);
+      font-size: var(--font-size-sm);
+      cursor: pointer;
+      transition: var(--transition-fast);
+      white-space: nowrap;
+
+      &:hover {
+        background: #e07b73;
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-button);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+
+      @media (max-width: 768px) {
+        width: 100%;
+        margin-top: var(--spacing-sm);
+      }
+    }
+  }
+
+  // Liste d'animaux en grille responsive
+  &_list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--spacing-3xl);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    // Desktop : 2 colonnes maximum
+    @media (min-width: 769px) {
+      grid-template-columns: repeat(2, 1fr);
+      max-width: var(--container-narrow);
+      margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-2xl);
+    }
+
+    &_item {
+      background: var(--color-primary);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-xl);
+      transition: var(--transition-normal);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+
+      &:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-2xl);
+      }
+    }
+  }
+
+  // Message quand aucun animal
+  .no-animals-message {
+    text-align: center;
+    padding: var(--spacing-5xl) var(--spacing-3xl);
+    background: var(--color-background);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-md);
+    margin-top: var(--spacing-3xl);
+    border: 1px solid rgba(145, 181, 159, 0.2);
+
+    h3 {
+      color: var(--color-text-primary);
+      margin-bottom: var(--spacing-lg);
+      font-size: var(--font-size-2xl);
+      font-family: var(--font-primary);
+      font-weight: var(--font-weight-semibold);
+    }
+
+    p {
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-base);
+      font-family: var(--font-secondary);
+      line-height: 1.6;
+    }
+  }
+}

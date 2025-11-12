@@ -1,0 +1,19 @@
+#root {
+  margin: 0;
+  width: 100%;
+
+  .app_container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    main {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+    }
+  }
+}

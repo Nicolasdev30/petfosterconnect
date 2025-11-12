@@ -1,0 +1,89 @@
+paths:
+  /api/admin/users/{id}:
+    delete:
+      summary: Supprimer un utilisateur
+      description: Supprime un utilisateur et toutes ses données (conforme RGPD Art. 17)
+      tags: [Admin]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID de l'utilisateur à supprimer
+      responses:
+        200:
+          description: Utilisateur supprimé avec succès
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Utilisateur supprimé avec succès"
+                  data:
+                    type: object
+                    properties:
+                      deleted_user_id:
+                        type: integer
+                      deleted_user_email:
+                        type: string
+                      admin_action_by:
+                        type: string
+                      timestamp:
+                        type: string
+                        format: date-time
+        403:
+          description: Impossible de supprimer un autre administrateur
+        404:
+          description: Utilisateur non trouvé
+
+  /api/admin/associations/{id}:
+    delete:
+      summary: Supprimer une association (admin)
+      description: Supprime une association et tous ses animaux (action admin)
+      tags: [Admin]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID de l'association à supprimer
+      responses:
+        200:
+          description: Association supprimée avec succès
+        403:
+          description: Accès refusé - Admin requis
+        404:
+          description: Association non trouvée
+
+  /api/admin/animals/{id}:
+    delete:
+      summary: Supprimer un animal (admin)
+      description: Supprime un animal indépendamment de l'association (action admin)
+      tags: [Admin]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID de l'animal à supprimer
+      responses:
+        200:
+          description: Animal supprimé avec succès
+        403:
+          description: Accès refusé - Admin requis
+        404:
+          description: Animal non trouvé

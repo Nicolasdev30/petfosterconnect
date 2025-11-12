@@ -1,0 +1,56 @@
+name: Run Tests
+
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  frontend-test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      # 1. Récupération du code
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2. Installation de Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      # 3. Installation des dépendances
+      - name: Install dependencies
+        run: npm install
+
+      # 4. Lancement des tests
+      - name: Run tests
+        run: npm test
+
+  backend-test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      # 1. Récupération du code
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2. Installation de Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      # 3. Installation des dépendances
+      - name: Install dependencies
+        run: npm install
+
+      # 4. Lancement des tests
+      - name: Run tests
+        run: npm test

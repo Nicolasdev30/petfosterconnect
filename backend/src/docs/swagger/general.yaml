@@ -1,0 +1,51 @@
+paths:
+  /api:
+    get:
+      summary: Accueil de l'API
+      description: Endpoint principal qui présente l'API et ses routes disponibles
+      tags: [API]
+      responses:
+        200:
+          description: Informations sur l'API
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Bienvenue sur l'API Pet Foster Connect
+                  version:
+                    type: string
+                    example: 1.0.0
+                  endpoints:
+                    type: object
+
+  /api/health:
+    get:
+      summary: Vérification de l'état de l'API
+      description: Endpoint de santé pour vérifier que l'API fonctionne correctement
+      tags: [Health]
+      responses:
+        200:
+          description: API fonctionnelle
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: API Pet Foster Connect fonctionne correctement
+                  timestamp:
+                    type: string
+                    format: date-time
+                  version:
+                    type: string
+                    example: 1.0.0

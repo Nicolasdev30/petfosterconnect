@@ -1,0 +1,150 @@
+paths:
+  /api/requests:
+    post:
+      summary: Créer une demande d'accueil
+      description: Permet à une famille de faire une demande d'accueil pour un animal
+      tags: [Requests]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id_animal
+                - message
+              properties:
+                id_animal:
+                  type: integer
+                  description: ID de l'animal à adopter
+                  example: 1
+                message:
+                  type: string
+                  description: Message de motivation pour l'adoption
+                  example: "Nous souhaitons adopter Rex car nous avons beaucoup d'expérience avec les chiens."
+      responses:
+        201:
+          description: Demande créée avec succès
+        400:
+          description: Erreur de validation ou animal déjà demandé
+        401:
+          description: Non authentifié
+        403:
+          description: Accès refusé - Rôle famille requis
+        404:
+          description: Animal non trouvé
+
+  /api/requests/user:
+    get:
+      summary: Mes demandes d'adoption
+      description: Récupère toutes les demandes d'adoption faites par l'utilisateur connecté
+      tags: [Requests]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: status
+          schema:
+            type: string
+            enum: [pending, accepted, rejected]
+          description: Filtrer par statut de demande
+      responses:
+        200:
+          description: Liste des demandes récupérée avec succès
+        401:
+          description: Non authentifié
+        403:
+          description: Accès refusé - Rôle famille requis
+
+  /api/requests/received:
+    get:
+      summary: Demandes reçues par l'association
+      description: Récupère toutes les demandes d'adoption pour les animaux de l'association connectée
+      tags: [Requests]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: status
+          schema:
+            type: string
+            enum: [pending, accepted, rejected]
+          description: Filtrer par statut de demande
+        - in: query
+          name: animal_id
+          schema:
+            type: integer
+          description: Filtrer par ID d'animal
+      responses:
+        200:
+          description: Liste des demandes reçues récupérée avec succès
+        401:
+          description: Non authentifié
+        403:
+          description: Accès refusé - Rôle association requis
+
+  /api/requests/{id}:
+    get:
+      summary: Détails d'une demande
+      description: Récupère les détails d'une demande spécifique
+      tags: [Requests]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID unique de la demande
+          example: 1
+      responses:
+        200:
+          description: Détails de la demande récupérés avec succès
+        401:
+          description: Non authentifié
+        403:
+          description: Accès refusé
+        404:
+          description: Demande non trouvée
+
+    patch:
+      summary: Modifier le statut d'une demande
+      description: Permet à l'association de accepter/refuser une demande
+      tags: [Requests]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID de la demande à modifier
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - status
+              properties:
+                status:
+                  type: string
+                  enum: [pending, accepted, refused]
+                  example: "accepted"
+      responses:
+        200:
+          description: Statut modifié avec succès
+        400:
+          description: Erreur de validation
+        401:
+          description: Non authentifié
+        403:
+          description: Accès refusé
+        404:
+          description: Demande non trouvée

@@ -1,0 +1,134 @@
+
+# Dépendances Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Fichiers de production
+/frontend/dist/
+/backend/dist/
+/backend/build/
+
+# Variables d'environnement
+*.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Cache
+.npm
+.eslintcache
+.stylelintcache
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# nyc test coverage
+.nyc_output
+
+# Dependency directories
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Documentation temporaire et fichiers de test
+*-COMPLETE.md
+*-REPORT.md
+CLEANUP-*.md
+ANALYSIS-*.md
+test-*.js
+test-*.html
+*-test.*
+*-backup.*
+*-temp.*
+*-old.*
+
+# Fichiers temporaires
+temp/
+tmp/
+.temp/
+.tmp/
+*.backup
+*.bak
+*.tmp
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+
+# Fichiers d'IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Base de données locale
+*.sqlite
+*.db
+
+# Docker
+.dockerignore
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+
+# Fichiers de backup
+*.bak
+*.backup
+*.old
+
+# Uploads et fichiers utilisateur
+uploads/
+public/uploads/
+
+# Certificats SSL
+*.pem
+*.key
+*.crt
+
+# Fichiers temporaires du système
+*.tmp
+*.temp
+docker-compose.override.yml
+
+# Notes Alex
+.note_alex/
+.env

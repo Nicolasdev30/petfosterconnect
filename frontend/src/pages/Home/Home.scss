@@ -1,0 +1,289 @@
+/**
+ * STYLES POUR LA PAGE D'ACCUEIL
+ * 
+ * Design de landing page moderne :
+ * - Hero section avec illustration et slogan
+ * - Call-to-action vers les fonctionnalités principales
+ * - Sections explicatives (Comment ça marche, Nos valeurs)
+ * 
+ * Layout responsive :
+ * - Mobile-first design
+ * - Grilles adaptatives selon la taille d'écran
+ * - Espacement cohérent avec le design system
+ * 
+ * Éléments visuels :
+ * - Illustrations avec icônes métier
+ * - Dégradés et ombres pour la profondeur
+ * - Animations hover pour l'interactivité
+ */
+
+@use "../../assets/styles/variables";
+
+.home {
+  width: 100%;
+  margin: var(--spacing-4xl) 0;
+  padding: 0;
+  background: var(--color-background);
+  min-height: calc(100vh - 8rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    margin: var(--spacing-3xl) 0;
+    min-height: calc(100vh - 6rem);
+  }
+
+  // Section hero avec illustration et slogan principal
+  &_header {
+    width: 100%;
+    max-width: 1200px;
+    text-align: center;
+    padding: var(--spacing-5xl) var(--spacing-lg);
+    margin: 0 auto var(--spacing-5xl);
+    position: relative;
+    z-index: 10;
+    background: var(--color-background);
+
+    @media (max-width: 768px) {
+      padding: var(--spacing-4xl) var(--spacing-lg);
+      margin: 0 auto var(--spacing-4xl);
+    }
+
+    // Illustration principale de la page d'accueil
+    &_illustration {
+      width: min(60%, 500px);
+      aspect-ratio: 1/1;
+      margin: 0 auto var(--spacing-4xl);
+      background-image: url(../../../public/home_page_illustration.webp);
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+
+      @media (max-width: 768px) {
+        width: 80%;
+        margin-bottom: var(--spacing-3xl);
+      }
+    }
+
+    // Slogan principal de l'application
+    &_text {
+      font-family: var(--font-secondary);
+      font-size: var(--font-size-xl);
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+      max-width: 700px;
+      margin: 0 auto;
+
+      @media (max-width: 768px) {
+        font-size: var(--font-size-lg);
+        padding: 0 var(--spacing-lg);
+      }
+    }
+  }
+
+  // Liste des call-to-action principaux
+  &_list {
+    width: 100%;
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: var(--spacing-4xl);
+    list-style: none;
+    padding: 0 var(--spacing-lg);
+    margin: var(--spacing-5xl) auto;
+    position: relative;
+    z-index: 5;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-3xl);
+      margin: var(--spacing-4xl) auto;
+      padding: 0 var(--spacing-lg);
+    }
+
+    // Items individuels avec effets hover
+    &_item {
+      background: var(--color-white);
+      border-radius: var(--radius-xl);
+      padding: var(--spacing-4xl);
+      box-shadow: var(--shadow-md);
+      border: 1px solid rgba(145, 181, 159, 0.2);
+      transition: var(--transition-normal);
+
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      // Dernier item avec style spécial (accent)
+      &:last-child {
+        background: var(--color-accent);
+        color: var(--color-white);
+
+        h3,
+        p {
+          color: var(--color-white);
+        }
+      }
+
+      h3 {
+        font-family: var(--font-primary);
+        font-size: var(--font-size-2xl);
+        font-weight: var(--font-weight-semibold);
+        color: var(--color-text-primary);
+        margin-bottom: var(--spacing-xl);
+
+        @media (max-width: 768px) {
+          font-size: var(--font-size-xl);
+        }
+      }
+
+      p {
+        font-family: var(--font-secondary);
+        font-size: var(--font-size-lg);
+        color: var(--color-text-secondary);
+        line-height: 1.6;
+
+        @media (max-width: 768px) {
+          font-size: var(--font-size-base);
+        }
+      }
+
+      @media (max-width: 768px) {
+        padding: var(--spacing-3xl);
+      }
+    }
+  }
+
+  // Section explicative (Comment ça marche + Nos valeurs)
+  &_aside {
+    width: 100%;
+    max-width: 1200px;
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-5xl);
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(145, 181, 159, 0.2);
+    margin: var(--spacing-5xl) auto 0;
+    position: relative;
+    z-index: 5;
+
+    @media (max-width: 768px) {
+      padding: var(--spacing-4xl);
+      margin: var(--spacing-4xl) auto 0;
+    }
+
+    // Sections "Comment ça marche" et "Nos valeurs"
+    &_works,
+    &_values {
+      margin-bottom: var(--spacing-5xl);
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      // Titres des sections
+      > p {
+        font-family: var(--font-primary);
+        font-size: var(--font-size-3xl);
+        font-weight: var(--font-weight-semibold);
+        color: var(--color-text-primary);
+        text-align: center;
+        margin-bottom: var(--spacing-4xl);
+
+        @media (max-width: 768px) {
+          font-size: var(--font-size-2xl);
+          margin-bottom: var(--spacing-3xl);
+        }
+      }
+
+      // Grille d'icônes explicatives
+      &_container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--spacing-4xl);
+
+        @media (max-width: 768px) {
+          grid-template-columns: 1fr;
+          gap: var(--spacing-3xl);
+        }
+
+        // Icône individuelle avec texte explicatif
+        &_icon {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          padding: var(--spacing-3xl);
+          border-radius: var(--radius-lg);
+          background: var(--color-background);
+          transition: var(--transition-normal);
+
+          &:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+          }
+
+          // Image d'icône avec dimensions fixes
+          &_img {
+            width: 120px;
+            height: 120px;
+            margin-bottom: var(--spacing-xl);
+            background-position: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+
+            @media (max-width: 768px) {
+              width: 100px;
+              height: 100px;
+            }
+          }
+
+          // Texte explicatif sous l'icône
+          p {
+            font-family: var(--font-secondary);
+            font-size: var(--font-size-base);
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+            font-weight: var(--font-weight-medium);
+
+            @media (max-width: 768px) {
+              font-size: var(--font-size-sm);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Classes pour les différentes icônes (background-image)
+  // Icons
+  .inscription {
+    background-image: url(../../../public/home_page_notepad_icon.webp);
+  }
+
+  .search {
+    background-image: url(../../../public/home_page_glass_icon.webp);
+  }
+
+  .request {
+    background-image: url(../../../public/home_page_hands_up.webp);
+  }
+
+  .kindness {
+    background-image: url(../../../public/home_page_kindness_icon.webp);
+  }
+
+  .trust {
+    background-image: url(../../../public/home_page_trust_icon.webp);
+  }
+
+  .accessibility {
+    background-image: url(../../../public/home_page_accessibility.webp);
+  }
+
+  .security {
+    background-image: url(../../../public/home_page_security_icon.webp);
+  }
+}

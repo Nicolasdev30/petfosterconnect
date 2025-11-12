@@ -1,0 +1,396 @@
+@use "../../assets/styles/variables";
+
+.profile {
+  width: 100%;
+  max-width: 1200px;
+  margin: var(--spacing-4xl) auto;
+  padding: 0 var(--spacing-lg);
+  background: var(--color-background);
+  min-height: calc(100vh - 8rem);
+
+  @media (max-width: 768px) {
+    margin: var(--spacing-3xl) auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  // En-tête de la page profil
+  &_header {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto var(--spacing-4xl);
+    text-align: center;
+    padding: var(--spacing-4xl) var(--spacing-lg);
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(145, 181, 159, 0.2);
+    position: relative;
+    z-index: 10;
+
+    @media (max-width: 768px) {
+      padding: var(--spacing-3xl) var(--spacing-lg);
+      margin-bottom: var(--spacing-3xl);
+    }
+
+    h1 {
+      font-family: var(--font-primary);
+      font-size: var(--font-size-3xl);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+      margin: 0 0 var(--spacing-lg) 0;
+
+      @media (max-width: 768px) {
+        font-size: var(--font-size-2xl);
+      }
+    }
+
+    p {
+      font-family: var(--font-secondary);
+      font-size: var(--font-size-lg);
+      color: var(--color-text-secondary);
+      margin: 0;
+
+      @media (max-width: 768px) {
+        font-size: var(--font-size-base);
+      }
+    }
+  }
+
+  // Section des demandes
+  &_requests {
+    margin-top: var(--spacing-5xl);
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-4xl);
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(145, 181, 159, 0.2);
+    position: relative;
+    z-index: 5;
+
+    h2 {
+      font-family: var(--font-primary);
+      font-size: var(--font-size-2xl);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+      margin: 0 0 var(--spacing-3xl) 0;
+      text-align: center;
+
+      @media (max-width: 768px) {
+        font-size: var(--font-size-xl);
+        margin-bottom: var(--spacing-2xl);
+      }
+    }
+
+    .animals_list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: var(--spacing-3xl);
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-2xl);
+      }
+    }
+
+    // Message quand pas de demandes
+    > p {
+      text-align: center;
+      font-family: var(--font-secondary);
+      font-size: var(--font-size-lg);
+      color: var(--color-text-secondary);
+      padding: var(--spacing-4xl);
+      background: var(--color-background);
+      border-radius: var(--radius-lg);
+      margin: 0;
+
+      @media (max-width: 768px) {
+        font-size: var(--font-size-base);
+        padding: var(--spacing-3xl);
+      }
+    }
+  }
+
+  /**
+   * GRILLE DES ANIMAUX DE L'ASSOCIATION
+   *
+   * Layout responsive en grid avec :
+   * - Desktop : 3 colonnes
+   * - Tablet : 2 colonnes
+   * - Mobile : 1 colonne
+   *
+   * Optimisé pour l'affichage des cartes d'animaux
+   */
+  .animals_grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-2xl);
+    margin-top: var(--spacing-xl);
+
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: var(--spacing-xl);
+    }
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-lg);
+    }
+  }
+}
+
+/**
+ * CARTE DE GESTION D'ANIMAL
+ *
+ * Composant card pour afficher chaque animal avec :
+ * - Image en haut avec badge de statut
+ * - Informations organisées
+ * - Boutons d'action (modifier, supprimer)
+ *
+ * Design moderne avec ombres et transitions
+ */
+.animal_management_card {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(145, 181, 159, 0.2);
+  transition: all 0.3s ease;
+
+  /**
+   * EFFET HOVER
+   * Élévation de la carte au survol pour feedback visuel
+   */
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(59, 177, 136, 0.15);
+  }
+
+  /**
+   * CONTENEUR IMAGE
+   * Aspect ratio fixe 4:3 pour uniformité
+   * Position relative pour le badge de statut
+   */
+  &_image {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    background: var(--color-background);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    /**
+     * ZOOM IMAGE AU HOVER
+     * Effet visuel moderne et engageant
+     */
+    &:hover img {
+      transform: scale(1.05);
+    }
+
+    /**
+     * BADGE DE STATUT (disponible/accueilli)
+     * Positionné en overlay sur l'image
+     * Couleurs différenciées selon le statut
+     */
+    .status {
+      position: absolute;
+      top: var(--spacing-sm);
+      right: var(--spacing-sm);
+      padding: var(--spacing-xs) var(--spacing-md);
+      border-radius: var(--radius-full);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      text-transform: capitalize;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(4px);
+      box-shadow: var(--shadow-sm);
+
+      /**
+       * STATUT : DISPONIBLE
+       * Badge vert pour indiquer disponibilité
+       */
+      &--disponible {
+        color: var(--color-primary);
+        border: 1px solid var(--color-primary);
+      }
+
+      /**
+       * STATUT : ACCUEILLI
+       * Badge orange pour indiquer animal en famille d'accueil
+       */
+      &--accueilli {
+        color: #f59e0b;
+        border: 1px solid #f59e0b;
+      }
+    }
+  }
+
+  /**
+   * CONTENU DE LA CARTE
+   * Padding et espacement des informations
+   */
+  &_content {
+    padding: var(--spacing-lg);
+
+    /**
+     * NOM DE L'ANIMAL
+     * Titre principal de la carte
+     */
+    h4 {
+      font-family: var(--font-primary);
+      font-size: var(--font-size-xl);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+      margin: 0 0 var(--spacing-md) 0;
+    }
+  }
+
+  /**
+   * GRILLE D'INFORMATIONS
+   * Layout en colonnes pour les détails de l'animal
+   */
+  &_info {
+    display: grid;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+
+    /**
+     * LIGNE D'INFORMATION (Label + Value)
+     * Layout flex pour alignement horizontal
+     */
+    .info_row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--spacing-xs) 0;
+      border-bottom: 1px solid var(--color-background);
+
+      /**
+       * LABEL (Espèce, Race, etc.)
+       * Texte gris en gras
+       */
+      .info_label {
+        font-family: var(--font-secondary);
+        font-size: var(--font-size-sm);
+        font-weight: var(--font-weight-semibold);
+        color: var(--color-text-secondary);
+      }
+
+      /**
+       * VALEUR (Chien, Berger Allemand, etc.)
+       * Texte principal
+       */
+      .info_value {
+        font-family: var(--font-secondary);
+        font-size: var(--font-size-sm);
+        color: var(--color-text-primary);
+        text-align: right;
+      }
+    }
+  }
+
+  /**
+   * CONTENEUR DES BOUTONS D'ACTION
+   * Layout flex horizontal avec espacement
+   */
+  &_actions {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: stretch;
+
+    /**
+     * BOUTON D'ACTION (Modifier / Supprimer)
+     *
+     * Style de base pour tous les boutons :
+     * - Flex 1 pour largeur égale
+     * - Padding confortable
+     * - Bordures arrondies
+     * - Transitions fluides
+     */
+    .action_button {
+      flex: 1;
+      padding: var(--spacing-md);
+      border: none;
+      border-radius: var(--radius-md);
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-medium);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--spacing-sm);
+
+      /**
+       * ÉTAT : HOVER
+       * Assombrissement et élévation au survol
+       */
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+      }
+
+      /**
+       * ÉTAT : ACTIVE
+       * Enfoncement au clic pour feedback tactile
+       */
+      &:active {
+        transform: translateY(0);
+      }
+
+      /**
+       * VARIANTE : MODIFIER (Vert)
+       *
+       * Couleur primaire de l'application
+       * Icône : Crayon (faPencil)
+       */
+      &--edit {
+        background: var(--color-primary);
+        color: var(--color-white);
+
+        &:hover {
+          background: #32a077;
+        }
+
+        &:active {
+          background: #2d8f6a;
+        }
+      }
+
+      /**
+       * VARIANTE : SUPPRIMER (Rouge)
+       *
+       * Couleur danger pour action destructive
+       * Icône : Poubelle (faTrash)
+       */
+      &--delete {
+        background: #dc3545;
+        color: var(--color-white);
+
+        &:hover {
+          background: #c82333;
+        }
+
+        &:active {
+          background: #bd2130;
+        }
+      }
+
+      /**
+       * ICÔNES FONTAWESOME
+       * Taille ajustée pour lisibilité
+       */
+      svg {
+        font-size: var(--font-size-lg);
+      }
+    }
+  }
+}

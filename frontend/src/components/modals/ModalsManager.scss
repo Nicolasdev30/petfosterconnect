@@ -1,0 +1,97 @@
+@use "../../assets/styles/variables";
+
+.modal {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: modalFadeIn 0.3s ease-out;
+
+  @keyframes modalFadeIn {
+    from {
+      opacity: 0;
+      backdrop-filter: blur(0px);
+    }
+    to {
+      opacity: 1;
+      backdrop-filter: blur(4px);
+    }
+  }
+
+  &_content {
+    width: min(90%, 500px);
+    max-height: 90vh;
+    padding: var(--spacing-4xl);
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-2xl);
+    border: 1px solid rgba(145, 181, 159, 0.2);
+    position: relative;
+    animation: modalSlideIn 0.3s ease-out;
+
+    @keyframes modalSlideIn {
+      from {
+        transform: translateY(-20px) scale(0.95);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      width: 95%;
+      padding: var(--spacing-3xl);
+      margin: var(--spacing-lg);
+    }
+
+    &_close {
+      position: absolute;
+      top: var(--spacing-lg);
+      right: var(--spacing-lg);
+      width: 40px;
+      height: 40px;
+      background: var(--color-background);
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--font-size-lg);
+      color: var(--color-text-secondary);
+      transition: var(--transition-normal);
+
+      &:hover {
+        background: var(--color-accent);
+        color: var(--color-white);
+        border-color: var(--color-accent);
+        transform: scale(1.1);
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+
+      @media (max-width: 768px) {
+        width: 36px;
+        height: 36px;
+        top: var(--spacing-md);
+        right: var(--spacing-md);
+      }
+    }
+
+    &_form {
+      width: 100%;
+      padding-top: var(--spacing-2xl);
+    }
+  }
+}

@@ -1,0 +1,195 @@
+paths:
+  /api/animals:
+    get:
+      summary: Liste des animaux en adoption
+      description: Récupère tous les animaux avec recherche et pagination
+      tags: [Animals]
+      parameters:
+        - in: query
+          name: search
+          schema:
+            type: string
+          description: Recherche par nom, espèce ou race
+          example: Rex
+        - in: query
+          name: species
+          schema:
+            type: string
+          description: Filtrer par espèce
+          example: Chien
+        - in: query
+          name: status
+          schema:
+            type: string
+            enum: [disponible, accueilli, pending]
+          description: Filtrer par statut
+        - in: query
+          name: page
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+          description: Numéro de page
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 10
+          description: Nombre d'animaux par page
+      responses:
+        200:
+          description: Liste des animaux récupérée avec succès
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      animals:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Animal"
+                      pagination:
+                        type: object
+                        properties:
+                          current_page:
+                            type: integer
+                          total_pages:
+                            type: integer
+                          total_items:
+                            type: integer
+                          items_per_page:
+                            type: integer
+
+    post:
+      summary: Ajouter un nouvel animal
+      description: Permet à une association d'ajouter un animal à son catalogue
+      tags: [Animals]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - species
+                - age
+                - id_association
+              properties:
+                name:
+                  type: string
+                  description: Nom de l'animal
+                  example: "Rex"
+                species:
+                  type: string
+                  description: Espèce de l'animal
+                  example: "Chien"
+                breed:
+                  type: string
+                  description: Race de l'animal
+                  example: "Berger Allemand"
+                age:
+                  type: integer
+                  minimum: 0
+                  description: Âge en années
+                  example: 5
+                description:
+                  type: string
+                  description: Description détaillée
+                  example: "Gentil chien protecteur, très loyal"
+                photo_url:
+                  type: string
+                  format: uri
+                  description: URL de la photo
+                id_association:
+                  type: integer
+                  description: ID de l'association responsable
+                  example: 1
+      responses:
+        201:
+          description: Animal créé avec succès
+        400:
+          description: Erreur de validation
+        401:
+          description: Non authentifié
+        403:
+          description: Accès refusé - Rôle association requis
+
+  /api/animals/{id}:
+    get:
+      summary: Détails d'un animal
+      description: Récupère les informations détaillées d'un animal par son ID
+      tags: [Animals]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID unique de l'animal
+          example: 1
+      responses:
+        200:
+          description: Détails de l'animal récupérés avec succès
+        404:
+          description: Animal non trouvé
+
+    patch:
+      summary: Modifier un animal
+      description: Permet à l'association propriétaire de modifier les informations d'un animal
+      tags: [Animals]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID de l'animal à modifier
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                species:
+                  type: string
+                breed:
+                  type: string
+                age:
+                  type: integer
+                  minimum: 0
+                description:
+                  type: string
+                photo_url:
+                  type: string
+                  format: uri
+                status:
+                  type: string
+                  enum: [disponible, accueilli, pending]
+      responses:
+        200:
+          description: Animal modifié avec succès
+        400:
+          description: Erreur de validation
+        401:
+          description: Non authentifié
+        403:
+          description: Accès refusé
+        404:
+          description: Animal non trouvé

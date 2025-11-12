@@ -1,0 +1,18 @@
+{
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.8.0",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "jsdom": "^26.1.0",
+    "vitest": "^3.2.4"
+  },
+  "scripts": {
+    "test": "npm run test:backend && npm run test:frontend",
+    "test:backend": "cd backend && npm test",
+    "test:frontend": "cd frontend && npm test",
+    "test:watch": "npm run test:backend -- --watch & npm run test:frontend -- --watch"
+  },
+  "dependencies": {
+    "argon2": "^0.44.0"
+  }
+}
