@@ -41,7 +41,7 @@ const axios = new ApiClient(config.baseUrl);
 const animalService = new AnimalService(axios);
 
 export default function AnimalsList() {
-  const [animals, setAnimals] = useState<Animal[]>([]);
+  const [animals, setAnimals] = useState<Animal[]>();
   const [availableSpecies, setAvailableSpecies] = useState<string[]>([]);
   const [filters, setFilters] = useState({
     species: "",

@@ -35,30 +35,30 @@ INSERT INTO "user" (id_user, first_name, last_name, email, password, id_role, id
 (12, 'Admin', 'System', 'admin@petfosterconnect.com', '$argon2id$v=19$m=65536,t=3,p=4$7asDKNrYirHeiBYVj1C4pw$MwdGCSA6Z05T/K4fEWtBpkTInZnido2XGN7Un0HVpaQ', 3, NULL); -- password: Admin@123
 
 -- 🐾 Animaux (statuts : 'disponible' ou 'accueilli' uniquement)
-INSERT INTO animal (id_animal, name, species, breed, age, sex, description, photo_url, status, id_association) VALUES 
+INSERT INTO animal (id_animal, name, species, breed, age, sex, description, photo_url, status, id_association) VALUES
 -- Animaux de l'association "Refuge des 4 Pattes" (id=1)
-(1, 'Rex', 'Chien', 'Berger Allemand', 5, 'Mâle', 'Gentil chien protecteur, très loyal et obéissant. Parfait pour une famille expérimentée.', 'https://example.com/photos/rex.jpg', 'disponible', 1),
-(2, 'Luna', 'Chien', 'Golden Retriever', 3, 'Femelle', 'Chienne douce et affectueuse, parfaite avec les enfants. Très joueuse et sociable.', 'https://example.com/photos/luna.jpg', 'disponible', 1),
-(3, 'Max', 'Chien', 'Labrador', 7, 'Mâle', 'Chien calme et obéissant, idéal pour seniors. Très posé et affectueux.', 'https://example.com/photos/max.jpg', 'accueilli', 1),
+(1, 'Rex', 'Chien', 'Berger Allemand', 5, 'Mâle', 'Gentil chien protecteur, très loyal et obéissant. Parfait pour une famille expérimentée.', '/example_australien.webp', 'disponible', 1),
+(2, 'Luna', 'Chien', 'Golden Retriever', 3, 'Femelle', 'Chienne douce et affectueuse, parfaite avec les enfants. Très joueuse et sociable.', '/example_australien.webp', 'disponible', 1),
+(3, 'Max', 'Chien', 'Labrador', 7, 'Mâle', 'Chien calme et obéissant, idéal pour seniors. Très posé et affectueux.', '/example_australien.webp', 'accueilli', 1),
 
 -- Animaux de l'association "SOS Matous" (id=2)
-(4, 'Minette', 'Chat', 'Chartreux', 2, 'Femelle', 'Adorable chatte joueuse et câline. S''entend bien avec les autres chats.', 'https://example.com/photos/minette.jpg', 'disponible', 2),
-(5, 'Whiskers', 'Chat', 'Maine Coon', 4, 'Mâle', 'Chat majestueux et indépendant. Caractère bien trempé mais très affectueux.', 'https://example.com/photos/whiskers.jpg', 'disponible', 2),
-(6, 'Smokey', 'Chat', 'British Shorthair', 1, 'Mâle', 'Jeune chat très affectueux et joueur. Première adoption.', 'https://example.com/photos/smokey.jpg', 'disponible', 2),
+(4, 'Minette', 'Chat', 'Chartreux', 2, 'Femelle', 'Adorable chatte joueuse et câline. S''entend bien avec les autres chats.', '/example_bulldog.webp', 'disponible', 2),
+(5, 'Whiskers', 'Chat', 'Maine Coon', 4, 'Mâle', 'Chat majestueux et indépendant. Caractère bien trempé mais très affectueux.', '/example_bulldog.webp', 'disponible', 2),
+(6, 'Smokey', 'Chat', 'British Shorthair', 1, 'Mâle', 'Jeune chat très affectueux et joueur. Première adoption.', '/example_bulldog.webp', 'disponible', 2),
 
 -- Animaux de l'association "Amis des Animaux" (id=3)
-(7, 'Bella', 'Chien', 'Border Collie', 2, 'Femelle', 'Chienne énergique qui adore jouer et courir. Besoin d''exercice quotidien.', 'https://example.com/photos/bella.jpg', 'disponible', 3),
-(8, 'Oscar', 'Chat', 'Persan', 6, 'Mâle', 'Chat tranquille qui cherche un foyer paisible. Parfait pour appartement.', 'https://example.com/photos/oscar.jpg', 'disponible', 3),
+(7, 'Bella', 'Chien', 'Border Collie', 2, 'Femelle', 'Chienne énergique qui adore jouer et courir. Besoin d''exercice quotidien.', '/example_australien.webp', 'disponible', 3),
+(8, 'Oscar', 'Chat', 'Persan', 6, 'Mâle', 'Chat tranquille qui cherche un foyer paisible. Parfait pour appartement.', '/example_bulldog.webp', 'disponible', 3),
 
 -- Animaux de l'association "Refuge du Bonheur" (id=4)
-(9, 'Rocky', 'Chien', 'Bulldog Français', 4, 'Mâle', 'Chien sociable et drôle. Caractère jovial et attachant.', 'https://example.com/photos/rocky.jpg', 'disponible', 4),
-(10, 'Mimi', 'Chat', 'Siamois', 3, 'Femelle', 'Chatte bavarde et attachante. Très communicative et affectueuse.', 'https://example.com/photos/mimi.jpg', 'accueilli', 4),
+(9, 'Rocky', 'Chien', 'Bulldog Français', 4, 'Mâle', 'Chien sociable et drôle. Caractère jovial et attachant.', '/example_bulldog.webp', 'disponible', 4),
+(10, 'Mimi', 'Chat', 'Siamois', 3, 'Femelle', 'Chatte bavarde et attachante. Très communicative et affectueuse.', '/example_bulldog.webp', 'accueilli', 4),
 
 -- Animaux de l'association "Protection Animale 33" (id=5)
-(11, 'Buddy', 'Chien', 'Beagle', 5, 'Mâle', 'Chien chasseur reconverti en chien de famille. Très gentil avec les enfants.', 'https://example.com/photos/buddy.jpg', 'disponible', 5),
-(12, 'Shadow', 'Chat', 'Chat de gouttière', 2, 'Mâle', 'Chat noir mystérieux mais très affectueux. Récupéré dans la rue.', 'https://example.com/photos/shadow.jpg', 'disponible', 5),
-(13, 'Coco', 'Chien', 'Cocker Spaniel', 6, 'Femelle', 'Chien doux et patient, excellent avec les enfants.', 'https://example.com/photos/coco.jpg', 'disponible', 5),
-(14, 'Nala', 'Chat', 'Bengal', 1, 'Femelle', 'Jeune chatte très active et joueuse. Caractère espiègle.', 'https://example.com/photos/nala.jpg', 'disponible', 5);
+(11, 'Buddy', 'Chien', 'Beagle', 5, 'Mâle', 'Chien chasseur reconverti en chien de famille. Très gentil avec les enfants.', '/example_australien.webp', 'disponible', 5),
+(12, 'Shadow', 'Chat', 'Chat de gouttière', 2, 'Mâle', 'Chat noir mystérieux mais très affectueux. Récupéré dans la rue.', '/example_bulldog.webp', 'disponible', 5),
+(13, 'Coco', 'Chien', 'Cocker Spaniel', 6, 'Femelle', 'Chien doux et patient, excellent avec les enfants.', '/example_australien.webp', 'disponible', 5),
+(14, 'Nala', 'Chat', 'Bengal', 1, 'Femelle', 'Jeune chatte très active et joueuse. Caractère espiègle.', '/example_bulldog.webp', 'disponible', 5);
 
 -- ✉️ Demandes d'accueil (statuts : 'pending', 'accepted', 'refused')
 INSERT INTO request (id_request, created_at, status, message, id_user, id_animal) VALUES 
