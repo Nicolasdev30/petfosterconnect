@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Script de test complet de l'application PetFosterConnect via Docker
-# Usage: bash test-docker-app.sh
+# Usage: ./test-docker-app.sh || bash test-docker-app.sh
 
 echo "======================================"
 echo "🧪 Tests PetFosterConnect - Docker"
